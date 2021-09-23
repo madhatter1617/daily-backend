@@ -1,13 +1,15 @@
 class SessionsController < ApplicationController
+    protect_from_forgery
   def create
     # byebug
-    user = User.find_by(user_name: params[:user_name])
+    user = User.find_by(username: params[:username])
     if user&.authenticate(params[:password])
         render json: user
     else
-        render json: {errors: "Invalid username and/or password"} 
+        render json: {errors: "Invalid username and/or password"}, status: :unauthorized
     end 
 end 
+
 end
 
 

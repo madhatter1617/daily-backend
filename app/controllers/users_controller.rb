@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    protect_from_forgery
     # wrap_parameters format: []
 
     # rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
@@ -12,14 +13,14 @@ class UsersController < ApplicationController
     
         #GET /users/:id
     
-        # def show
-        #     user = User.find_by(id: session[:user_id])
-        #     if user
-        #       render json: user
-        #     else
-        #       render json: { error: "Not authorized" }, status: :unauthorized
-        #     end
-        # end
+        def show
+            user = User.find_by(id: session[:user_id])
+            if user
+              render json: user
+            else
+              render json: { error: "Not authorized" }, status: :unauthorized
+            end
+        end
     
         # POST /users/:id
         def create

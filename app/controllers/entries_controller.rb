@@ -5,28 +5,31 @@ class EntriesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :invalid_response
 
-    def index
-        entries = Entry.all
-        render json: entries    
-    end
-    
     # def index
-    #     # session[:user_id] = "user"
-    #     puts "WHATS UP PARTY PEOPLE THIS IS #{current_user ? current_user.username : "NOT LOGGED IN"}"
+    #     return render json: {error: ["Not Authorized, please login!" ]}, status: :unauthorized unless session.include? :user_id
+             
+    #      productions = Production.all
+    #      render json: productions
+    #  end 
+    
+    def index
+        # session[:user_id] = "user"
+        puts "WHATS UP PARTY PEOPLE THIS IS #{current_user ? current_user.username : "NOT LOGGED IN"}"
 
-    #     if current_user == nil
-    #         render json:[]
-    #     else
-    #         entries = current_user.entries
-    #         render json: entries 
-    #     end
-    # end
+        if current_user == nil
+            render json:[]
+        else
+            entries = current_user.entries
+            render json: entries 
+        end
+    end
 
 
     def update
         entry = find_entry
         entry.update(
-            note: params[:note]
+            entry_text: params[:entry_text],
+            title: params[:title]
         )
         render json: entry
     end

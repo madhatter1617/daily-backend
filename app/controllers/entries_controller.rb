@@ -15,7 +15,7 @@ class EntriesController < ApplicationController
     def index
         # session[:user_id] = "user"
         puts "WHATS UP PARTY PEOPLE THIS IS #{current_user ? current_user.username : "NOT LOGGED IN"}"
-
+# byebug
         if current_user == nil
             render json:[]
         else

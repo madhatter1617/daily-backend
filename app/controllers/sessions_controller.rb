@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
     protect_from_forgery
-    skip_before_action :authorize, only: [:create]
+    # skip_before_action :authorize, only: [:create]
     
   def create
     # byebug
@@ -12,17 +12,8 @@ class SessionsController < ApplicationController
     end 
 end 
 
+      def destroy
+        session.delete :user_id
+        head :no_content
+      end
 end
-
-
-#     def create
-#         user = User.find_or_create_by(username: params[:username])
-#         session[:user_id] = user.id
-#         render json: user
-#       end
-
-#       def destroy
-#         session.delete :user_id
-#         head :no_content
-#       end
-# end

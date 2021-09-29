@@ -53,7 +53,7 @@ class EntriesController < ApplicationController
 
 
     def destroy
-        entry = Entry.find_by(id: params[:id]) 
+        entry = Entry.find(params[:id])
         # entry.destroy
         # entry.to_json
         render json: entry.destroy 

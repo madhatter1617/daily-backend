@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     protect_from_forgery
+    skip_before_action :authorize, only: [:create, :index]
     # wrap_parameters format: []
 
     # rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response

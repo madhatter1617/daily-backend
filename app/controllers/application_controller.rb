@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
     def authorize
         # byebug
-        return render json: {error: ["Not authorized"]}, status: :unauthorized unless session.include? :user_id
+        return render json: {error: ["Not authorized from app"]}, status: :unauthorized unless session.include? :user_id
     end 
 
 end

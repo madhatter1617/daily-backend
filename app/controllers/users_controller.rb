@@ -6,10 +6,10 @@ class UsersController < ApplicationController
     # rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
         
     
-        # def index 
-        #     users = User.all
-        #     render json: users
-        # end
+        def index 
+            users = User.all
+            render json: users
+        end
     
         #GET /users/:id
     
@@ -18,14 +18,15 @@ class UsersController < ApplicationController
             if user
               render json: user
             else
-              render json: { error: "Not authorized" }, status: :unauthorized
+              render json: { error: "Not authorized from user" }, status: :unauthorized
             end
         end
     
         # POST /users/:id
         def create
             user = User.create(user_params)
-            render json: user
+            session[:user_id] = user.id
+            render json: user, status: :created 
         end
 
         # def create
